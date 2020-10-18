@@ -1,16 +1,33 @@
-#ask user for messege
-messege = input("Please input the messege: ").strip()
+initialInput = input("Press "e" to encode a messege, or "d" to decode a messege ").strip()
 
-#Ask user for key
-key = int(input("Please input the key provided: ").strip())
+#TO ENCODE
+if initialInput.lower() == "e" :
+    #Ask user for messege and key
+    messege = input("Please input the messege: ").strip()
+    key = int(input("Please input the key provided: ").strip())
 
-newMessege = []
+    encodedMessege = []
 
-#Go through each character of the messege
-for letter in messege:
-#if adding the key makes the value more than 122, go back to 32
-    while (ord(letter) + key) > 122 :
-        key = key - 90
-    #convert each character to the correct ascii value and add the key
-    newMessege.append(chr(ord(letter) + key))
-print(''.join(newMessege))
+    #Go through each character of the messege and if ascii value is more than 122, go back to ascii #32
+    for letter in messege:
+        while (ord(letter) + key) > 122 :
+            key = key - 90
+        encodedMessege.append(chr(ord(letter) + key))
+
+    print(''.join(encodedMessege))
+
+#TO DECODE
+elif initialInput.lower() == "d" :
+    #Ask user encoded messege and key
+    messege = input("Please type the encoded message: ").strip()
+    key = int(input("Please input the key provided: ").strip())
+
+    decodedMessege = []
+
+    # Go through every letter in the encoded messege and if substracting the key from the ascii value of the letter is less than 32, add 90
+    for letter in messege :
+        while (ord(letter) - key) < 32 :
+            key = key + 90
+        decodedMessege.append(chr(ord(letter) - key))
+
+    print(''.join(decodedMessege))
